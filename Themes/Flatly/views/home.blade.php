@@ -16,6 +16,7 @@
 
     <div class="row">
 
+        <?php /*
         <h1 class="text-center">Ostanite informirani</h1>
         <div class="form-group has-success col-sm-6 col-sm-offset-3">
             <form action="/en/newsletter/confirm" method="post">
@@ -32,6 +33,6 @@
 
             </form>
         </div>
-
+        */ ?>
     </div>
 @stop

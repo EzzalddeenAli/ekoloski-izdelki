@@ -18,7 +18,6 @@ class NewsletterController
 
         $email = $request->input("email");
 
-
         Mail::send('email.newsletter.confirmation', ['title' => 'Newsletter confirmation', 'content' => 'Confirm email: '], function ($message)
         {
             $message->from('bojan.kovacec@gmail.com', 'Bojan Kov');
