@@ -10,3 +10,9 @@ $router->group(['prefix' => 'store'], function (Router $router) {
     $router->post('pay', ['as' => 'store.pay', 'uses' => 'StoreController@postPayWithStripe']);
 });
 
+
+$router->group(['prefix' => 'newsletter'], function (Router $router) {
+    $locale = LaravelLocalization::setLocale() ?: App::getLocale();
+    $router->post('confirm', ['as' => 'newsletter.confirm', 'uses' => 'NewsletterController@confirm']);
+});
+

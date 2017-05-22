@@ -11,7 +11,7 @@ return [
     | framework needs to place the application's name in a notification or
     | any other location as required by the application or its packages.
     */
-    'name' => 'My Application',
+    'name' => 'Ekoloski izdelki',
 
     /*
    |--------------------------------------------------------------------------
@@ -189,7 +189,9 @@ return [
 
         App\Providers\RouteServiceProvider::class,
 
-        Laravel\Cashier\CashierServiceProvider::class
+        Laravel\Cashier\CashierServiceProvider::class,
+        Nwidart\Modules\LaravelModulesServiceProvider::class,
+
     ],
 
     /*
@@ -236,6 +238,9 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Notification' => Illuminate\Support\Facades\Notification::class,
+        'Module' => Nwidart\Modules\Facades\Module::class,
+
+
     ],
 
 ];
