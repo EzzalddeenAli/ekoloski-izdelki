@@ -15,7 +15,26 @@ class CreateBillingCustomersTable extends Migration
         Schema::create('billing__customers', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            // Your fields
+
+            $table->string('email')->unique();
+            $table->integer('user_id');
+
+            $table->boolean('newsletter_active');
+
+            // newsletter registration
+            $table->string('newsletter_token');
+            $table->timestamp('newsletter_registration_at');
+            $table->string('newsletter_registration_ip');
+
+            // newsletter confirmation DOI
+            $table->boolean('newsletter_confirmed');
+            $table->timestamp('newsletter_confirmed_at');
+            $table->string('newsletter_confirm_ip');
+
+            // newsletter unsubscription
+            $table->timestamp('newsletter_unsubscribed_at');
+            $table->string('newsletter_unsubscribe_ip');
+
             $table->timestamps();
         });
     }

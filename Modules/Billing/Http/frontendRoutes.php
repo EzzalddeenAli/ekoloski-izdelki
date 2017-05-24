@@ -13,6 +13,10 @@ $router->group(['prefix' => 'store'], function (Router $router) {
 
 $router->group(['prefix' => 'newsletter'], function (Router $router) {
     $locale = LaravelLocalization::setLocale() ?: App::getLocale();
-    $router->post('confirm', ['as' => 'newsletter.confirm', 'uses' => 'NewsletterController@confirm']);
+    $router->post('confirmation/send', ['as' => 'newsletter.send.confirmation', 'uses' => 'NewsletterController@sendConfirmation']);
+    $router->get('subscribe/{token}', ['as' => 'newsletter.subscribe', 'uses' => 'NewsletterController@subscribe']);
+    $router->get('unsubscribe', ['as' => 'newsletter.unsubscribe', 'uses' => 'NewsletterController@unsubscribe' ]);
+    $router->post('post/unsubscribe', ['as' => 'newsletter.post.unsubscribe', 'uses' => 'NewsletterController@postUnsubscribe']);
+
 });
 

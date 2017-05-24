@@ -12,16 +12,16 @@ class NewsletterConfirmation extends Mailable
     use Queueable, SerializesModels;
 
 
-    public $email;
+    public $customer;
 
     /**
      * Create a new message instance.
      *
-     * @param $email
+     * @param $customer
      */
-    public function __construct($email)
+    public function __construct($customer)
     {
-        $this->email = $email;
+        $this->customer = $customer;
     }
 
     /**
@@ -31,7 +31,10 @@ class NewsletterConfirmation extends Mailable
      */
     public function build()
     {
-        return $this->text("emails.newsletter.confirmation");//->from('newsletter@mail.ekoloski-izdelki.si')
+        return $this->subject('ekoloski-izdelki.si prijava na elektronske novice')
+            ->text("email.newsletter.subscribe");
+
+        //->from('newsletter@mail.ekoloski-izdelki.si')
         //->view('emails.newsletter.confirmation');
 
     }

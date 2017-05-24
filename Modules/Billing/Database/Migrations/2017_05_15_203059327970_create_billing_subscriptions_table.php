@@ -41,12 +41,14 @@ class CreateBillingSubscriptionsTable extends Migration
      */
     public function down()
     {
+
         Schema::dropIfExists('billing__subscriptions');
 
         Schema::table('users', function($table)
         {
             $table->dropColumn(array('stripe_id', 'card_brand', 'card_last_four', 'trial_ends_at'));
         });
+
 
     }
 }

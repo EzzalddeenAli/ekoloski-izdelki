@@ -1,25 +1,26 @@
 @extends('layouts.master')
 
 @section('title')
-    {{ $page->title }} | @parent
+    Confirm Newsletter Registration | @parent
 @stop
 @section('meta')
-    <meta name="title" content="{{ $page->meta_title}}" />
-    <meta name="description" content="{{ $page->meta_description }}" />
+    <meta name="title" content=""/>
+    <meta name="description" content=""/>
 @stop
 
 @section('content')
-    <div class="row">
-        <h1>{{ $page->title }}</h1>
-        {!! $page->body !!}
-    </div>
 
     <div class="row">
+        @if(!empty($msg))
+            <div class="alert alert-danger">
+                {{ $msg }}
+            </div>
+        @endif
 
+        <h1 class="text-center">Odjava od elektronskih novic</h1>
 
-        <h1 class="text-center">Ostanite informirani</h1>
         <div class="form-group has-success col-sm-6 col-sm-offset-3">
-            <form action="{{ route('newsletter.send.confirmation') }}" method="post">
+            <form action="/en/newsletter/unsubscribe" method="post">
                 {{ csrf_field() }}
 
                 <label class="control-label" for="inputSuccess">elektronski naslov</label>
@@ -33,7 +34,6 @@
 
             </form>
         </div>
-
 
     </div>
 @stop
