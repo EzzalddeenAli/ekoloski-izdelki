@@ -1,12 +1,13 @@
 @extends('layouts.master')
 
 @section('title')
-    Not found | @parent
+    Internal Server Error | @parent
 @stop
 
 @section('content')
     <div class="row">
-        <h1>500: ups something went wrong</h1>
-        <p>Our developers are working on it.</p>
+        <div class="alert alert-warning text-center">
+            <p>500: Internal Server Error</p>
+        </div>
     </div>
 @stop

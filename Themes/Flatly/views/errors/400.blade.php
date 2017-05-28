@@ -7,7 +7,7 @@
 @section('content')
     <div class="row">
         <div class="alert alert-warning text-center">
-            <p>404: Not Found</p>
+            <p>400: Bad Request</p>
         </div>
     </div>
 @stop

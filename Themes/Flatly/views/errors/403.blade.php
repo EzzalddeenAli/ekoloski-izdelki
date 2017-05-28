@@ -1,13 +1,13 @@
 @extends('layouts.master')
 
 @section('title')
-    Not found | @parent
+    Forbiden | @parent
 @stop
 
 @section('content')
     <div class="row">
         <div class="alert alert-warning text-center">
-            <p>404: Not Found</p>
+            <p>403: Forbiden</p>
         </div>
     </div>
 @stop
