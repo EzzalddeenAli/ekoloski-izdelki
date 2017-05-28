@@ -12,12 +12,35 @@ class CreateBillingCustomersTable extends Migration
      */
     public function up()
     {
+        Schema::create('billing__events', function (Blueprint $table) {
+
+            $table->engine = 'InnoDB';
+            $table->increments('id');
+            $table->string('method');
+            $table->string('ip');
+            $table->string('url');
+            $table->string('params');
+
+            $table->string('session_id');
+            $table->string('csrf_token'); // is visible in frontend
+            $table->string('backend_token'); // is visible in backend
+            $table->string('frontend_token'); // 'unique' frontend token - javascript
+
+
+
+
+            $table->timestamps();
+        });
+
+
         Schema::create('billing__customers', function (Blueprint $table) {
+
             $table->engine = 'InnoDB';
             $table->increments('id');
 
             $table->string('email')->unique();
             $table->integer('user_id');
+            $table->string('locale');
 
             $table->boolean('newsletter_active');
 
@@ -36,6 +59,7 @@ class CreateBillingCustomersTable extends Migration
             $table->string('newsletter_unsubscribe_ip');
 
             $table->timestamps();
+
         });
     }
 
@@ -46,6 +70,7 @@ class CreateBillingCustomersTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('billing__events');
         Schema::dropIfExists('billing__customers');
     }
 }

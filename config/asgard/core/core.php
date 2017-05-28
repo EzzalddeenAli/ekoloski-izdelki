@@ -30,7 +30,7 @@ return [
     | colors are available for you to use: skin-blue, skin-green,
     | skin-black, skin-purple, skin-red and skin-yellow.
     */
-    'skin' => 'skin-blue',
+    'skin' => 'skin-green',
 
     /*
     |--------------------------------------------------------------------------
@@ -55,6 +55,7 @@ return [
            'auth.admin',
        ],
        'frontend' => [
+            'log.event'
        ],
        'api' => [
        ],
@@ -154,5 +155,6 @@ return [
     | Enable module view overrides at theme locations
     |--------------------------------------------------------------------------
     */
+
     'enable-theme-overrides' => false,
 ];

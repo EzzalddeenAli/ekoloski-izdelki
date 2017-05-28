@@ -6,6 +6,7 @@ use Illuminate\Routing\Router;
 $router->group(['prefix' => 'auth'], function (Router $router) {
     # Login
     $router->get('login', ['middleware' => 'auth.guest', 'as' => 'login', 'uses' => 'AuthController@getLogin']);
+
     $router->post('login', ['as' => 'login.post', 'uses' => 'AuthController@postLogin']);
     # Register
     if (config('asgard.user.config.allow_user_registration', true)) {

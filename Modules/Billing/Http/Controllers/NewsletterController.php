@@ -11,8 +11,15 @@ use Modules\Billing\Mail\NewsletterConfirmation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
+use Illuminate\Support\Facades\App;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+
+
 class NewsletterController
 {
+
+
+
     /**
      * Send newsletter confirmation email.
      * Create a new customer if does not exist yet.
@@ -29,19 +36,24 @@ class NewsletterController
         if(!$customer) {
             $customer = new Customer();
             $customer->email= $email;
-            $customer->registration_at = date('Y-m-d G:i:s');
-            $customer->registration_ip = $request->ip();
         }
 
-        if(!$customer->newsletter_confirmed) {
+        // TODO: is thi fine ?
+        if(!$customer->newsletter_token) {
             $customer->newsletter_token = bin2hex(random_bytes(16));
         }
 
-        $customer->save();
+        $locale = App::getLocale();
 
+        $customer->locale = $locale;
+        $customer->newsletter_registration_at = date('Y-m-d G:i:s');
+        $customer->newsletter_registration_ip = $request->ip();
+
+        $customer->save();
         Mail::to($email)->send(new NewsletterConfirmation($customer));
 
-        return view('newsletter.confirm');
+        return view('newsletter.confirm', compact('customer'));
+
     }
 
 
@@ -52,7 +64,7 @@ class NewsletterController
 
         $customer = Customer::where('newsletter_token', '=', $token)->first();
 
-        if($customer->newsletter_token == $token) {
+        if($customer && $customer->newsletter_token == $token) {
 
             $customer->newsletter_active = true;
             $customer->newsletter_confirmed = true;
@@ -62,15 +74,16 @@ class NewsletterController
             $customer->save();
 
             return view('newsletter.subscribed');
+
         } else {
 
-            return view('newsletter.subscribe.token-not-found');
+            return view('newsletter.token-not-found');
         }
 
     }
 
 
-    public function unsubscribe(Request $request) {
+    public function unsubscribe(Request $request, $token = null) {
 
         if($request->isMethod('post')) {
             $customer = Customer::whereEmail($request->input('email'))->first();
@@ -81,9 +94,22 @@ class NewsletterController
             }
 
             return view('newsletter.unsubscribed');
+
         } else {
+
+            if($token != null) {
+                $customer = Customer::where('newsletter_token', '=', $token)->first();
+                $customer->newsletter_active = false;
+                $customer->newsletter_unsubscribed_at = date('Y-m-d G:i:s');
+                $customer->newsletter_unsubscribe_ip = $request->ip();
+                $customer->save();
+
+                return view('newsletter.unsubscribed');
+            }
+
             return view('newsletter.unsubscribe');
         }
+
     }
 
 }

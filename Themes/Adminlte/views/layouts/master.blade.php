@@ -14,7 +14,9 @@
         <link media="all" type="text/css" rel="stylesheet" href="{{ URL::asset($css) }}">
     @endforeach
     {!! Theme::script('vendor/jquery/jquery.min.js') !!}
+
     @include('partials.asgard-globals')
+
     @section('styles')
     @show
 

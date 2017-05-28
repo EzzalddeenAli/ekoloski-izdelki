@@ -1,18 +1,11 @@
-Pozdravljeni,
+{{ trans('billing::newsletter.confirm.greeting') }}
 
-za dokoncanje prijave ne elektronske novice kliknite na spodnjo povezavo:
-
-
-
+{{ trans('billing::newsletter.confirm.click on link bellow') }}
 {{  route('newsletter.subscribe', ['token' => $customer->newsletter_token]) }}
 
 
 
+{{ trans('billing::newsletter.footer.text') }}
 
 
-
-Od elektronskih novic se lahko vedno odjavite na naslovu: {{ route('newsletter.unsubscribe') }}
-
-
-Hvala za zaupanje
-ekipa ekoloski-izdelki.si
+{{ trans('billing::newsletter.unsubscribe.link') }} {{ route('newsletter.unsubscribe') }}

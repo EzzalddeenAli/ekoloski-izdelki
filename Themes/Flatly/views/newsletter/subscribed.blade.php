@@ -13,7 +13,7 @@
     </div>
 
     <div class="row">
-        <h1 class="text-center">Prijava uspesna</h1>
+        <h1 class="text-center">{{ trans('billing::newsletter.confirm.success') }}</h1>
     </div>
 
 @stop

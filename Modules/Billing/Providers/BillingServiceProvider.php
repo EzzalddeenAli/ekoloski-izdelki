@@ -4,6 +4,7 @@ namespace Modules\Billing\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Modules\Core\Traits\CanPublishConfiguration;
+use Modules\Billing\Http\Middleware\EventMiddleware;
 
 class BillingServiceProvider extends ServiceProvider
 {
@@ -16,6 +17,14 @@ class BillingServiceProvider extends ServiceProvider
     protected $defer = false;
 
     /**
+     * @var array
+     */
+    protected $middleware = [
+        'log.event' => EventMiddleware::class,
+    ];
+
+
+    /**
      * Register the service provider.
      *
      * @return void
@@ -23,10 +32,12 @@ class BillingServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerBindings();
+        // $this->registerMiddleware($this->app['router']);
     }
 
     public function boot()
     {
+        $this->registerMiddleware();
         $this->publishConfig('billing', 'permissions');
     }
 
@@ -47,7 +58,7 @@ class BillingServiceProvider extends ServiceProvider
             function () {
                 $repository = new \Modules\Billing\Repositories\Eloquent\EloquentSubscriptionRepository(new \Modules\Billing\Entities\Subscription());
 
-                if (! config('app.cache')) {
+                if (!config('app.cache')) {
                     return $repository;
                 }
 
@@ -59,7 +70,7 @@ class BillingServiceProvider extends ServiceProvider
             function () {
                 $repository = new \Modules\Billing\Repositories\Eloquent\EloquentCustomerRepository(new \Modules\Billing\Entities\Customer());
 
-                if (! config('app.cache')) {
+                if (!config('app.cache')) {
                     return $repository;
                 }
 
@@ -71,7 +82,7 @@ class BillingServiceProvider extends ServiceProvider
             function () {
                 $repository = new \Modules\Billing\Repositories\Eloquent\EloquentOrderRepository(new \Modules\Billing\Entities\Order());
 
-                if (! config('app.cache')) {
+                if (!config('app.cache')) {
                     return $repository;
                 }
 
@@ -81,7 +92,19 @@ class BillingServiceProvider extends ServiceProvider
 
         // add bindings
 
-
-
     }
+
+    /**
+     * Register the filters.
+     *
+     * @internal param Router $router
+     */
+    private function registerMiddleware()
+    {
+        foreach ($this->middleware as $name => $class) {
+            $this->app['router']->middleware($name, $class);
+        }
+    }
+
+
 }

@@ -12,10 +12,8 @@
 
     <div class="row">
 
-        <h1>Za dokoncanje prijave potreben se en korak</h1>
-
-        <div class="alert alert-success">
-            Da potrdite registracijo sledite povezavi ki smo vam jo poslali na vas elektronski naslov. {{--<strong>{!! "tes@test" !!}</strong>--}}
+        <div class="alert alert-warning text-center">
+            {{ trans('billing::newsletter.confirm.confirmation email sent') }} <br>
         </div>
 
     </div>

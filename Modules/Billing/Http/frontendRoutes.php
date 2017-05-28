@@ -15,8 +15,19 @@ $router->group(['prefix' => 'newsletter'], function (Router $router) {
     $locale = LaravelLocalization::setLocale() ?: App::getLocale();
     $router->post('confirmation/send', ['as' => 'newsletter.send.confirmation', 'uses' => 'NewsletterController@sendConfirmation']);
     $router->get('subscribe/{token}', ['as' => 'newsletter.subscribe', 'uses' => 'NewsletterController@subscribe']);
-    $router->get('unsubscribe', ['as' => 'newsletter.unsubscribe', 'uses' => 'NewsletterController@unsubscribe' ]);
-    $router->post('post/unsubscribe', ['as' => 'newsletter.post.unsubscribe', 'uses' => 'NewsletterController@postUnsubscribe']);
 
+    $router->any('unsubscribe/{token?}', ['as' => 'newsletter.unsubscribe', 'uses' => 'NewsletterController@unsubscribe' ]);
+
+
+    // $router->post('post/unsubscribe', ['as' => 'newsletter.post.unsubscribe', 'uses' => 'NewsletterController@postUnsubscribe']);
+    // $router->get('unsubscribe/success', ['as' => 'newsletter.unsubscribe.success', 'uses' => 'NewsletterController@']) // not available
 });
 
+$router->get('legal', ['as' => 'billing.legal.general', 'uses' => 'LegalController@general']);
+
+
+// is defined in asgard core.conf
+// $router->group(['middleware' => 'log.event', 'uses' => 'LogController@event']);
+
+// route to set frontend_token
+$router->any('log/set/frontend/{token}', ['as' => 'log.set.frontend.token', 'uses' => 'LogController@setFrontendToken']);

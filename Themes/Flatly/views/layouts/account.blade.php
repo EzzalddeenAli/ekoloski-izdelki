@@ -23,25 +23,31 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
+
+    {!! Theme::style('css/main.css') !!}
 </head>
 <body class="hold-transition login-page">
 
-<div class="login-box">
-    @yield('content')
-</div>
+    @include('partials.navigation')
 
-<!-- Bootstrap -->
-<script src="{{ asset('themes/adminlte/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('themes/adminlte/vendor/iCheck/icheck.min.js') }}"></script>
-<script src="{{ asset('themes/adminlte/js/vendor/alertify/alertify.js') }}"></script>
-<script>
-    $(function () {
-        $('input').iCheck({
-            checkboxClass: 'icheckbox_square-blue',
-            radioClass: 'iradio_square-blue',
-            increaseArea: '20%' // optional
+    <div class="login-box">
+        @yield('content')
+    </div>
+
+    @include('partials.footer')
+
+    <!-- Bootstrap -->
+    <script src="{{ asset('themes/adminlte/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('themes/adminlte/vendor/iCheck/icheck.min.js') }}"></script>
+    <script src="{{ asset('themes/adminlte/js/vendor/alertify/alertify.js') }}"></script>
+    <script>
+        $(function () {
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' // optional
+            });
         });
-    });
-</script>
+    </script>
 </body>
 </html>
