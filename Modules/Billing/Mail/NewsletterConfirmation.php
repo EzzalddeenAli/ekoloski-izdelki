@@ -31,7 +31,7 @@ class NewsletterConfirmation extends Mailable
      */
     public function build()
     {
-        return $this->subject('ekoloski-izdelki.si prijava na elektronske novice')
+        return $this->subject(url('/') . ': potrdite prijavo na elektronske novice')
             ->text("email.newsletter.subscribe");
 
         //->from('newsletter@mail.ekoloski-izdelki.si')
