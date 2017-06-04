@@ -36,4 +36,12 @@ class PublicController extends BasePublicController
         // $message = request.param('message');
     }
 
+
+    public function near() {
+        // get list of recomended locations
+        $items = [];
+        return view('item.near', compact('items'));
+    }
+
 }
+

@@ -138,6 +138,7 @@ return [
     */
     'log' => env('APP_LOG', 'single'),
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
+    'log_max_files' => env('LOG_MAX_FILES', 30),
 
     /*
     |--------------------------------------------------------------------------
