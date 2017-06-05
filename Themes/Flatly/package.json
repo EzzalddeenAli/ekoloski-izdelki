@@ -3,5 +3,8 @@
     "gulp": "^3.8.8",
     "gulp-shell": "^0.3.0",
     "laravel-elixir": "^5.0.0"
+  },
+  "dependencies": {
+    "vuejs-paginator": "^2.0.1"
   }
 }

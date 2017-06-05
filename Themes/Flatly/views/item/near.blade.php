@@ -32,7 +32,7 @@
 
                     <div class="bs-component">
 
-                        <div class="list-group">
+                        <div class="list-group" style="height: 550px; overflow-y: scroll">
 
                             <list-item
                                     v-for="item in items"
@@ -41,19 +41,16 @@
 
                             </list-item>
 
-
                         </div>
 
                     </div>
-
-
 
                 </div>
 
 
             </div>
             <div class="col-md-8">
-                <div id="map" style="min-height: 500px; width: 100%"></div>
+                <div id="map" style="min-height: 607px; width: 100%"></div>
             </div>
         </div>
     </div>
