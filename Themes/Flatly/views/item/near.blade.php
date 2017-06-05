@@ -31,18 +31,7 @@
                     </div>
 
                     <div class="bs-component">
-
-                        <div class="list-group" style="height: 550px; overflow-y: scroll">
-
-                            <list-item
-                                    v-for="item in items"
-                                    v-bind:item="item"
-                                    v-bind:key="item.id">
-
-                            </list-item>
-
-                        </div>
-
+                        <list-items list="items"></list-items>
                     </div>
 
                 </div>
@@ -53,6 +42,25 @@
                 <div id="map" style="min-height: 607px; width: 100%"></div>
             </div>
         </div>
+
+
+        <template id="item-list-template">
+            <div class="list-group" style="height: 550px; overflow-y: scroll">
+
+                <a href="#"
+                   class="list-group-item"
+                   v-on:click="details"
+                   v-for="item in items"
+                >
+                    <h4 class="list-group-item-heading">@{{ item.name }}</h4>
+                    <p class="list-group-item-text">@{{ item.name }}</p>
+                    <p class="list-group-item-text">@{{ item.latitude }} @{{ item.longitude }}</p>
+                </a>
+
+            </div>
+
+        </template>
+
     </div>
 
 
@@ -244,18 +252,39 @@
 
 
         Vue.component('list-item', {
-            props: ['item'],
-            template: '<a href="#" class="list-group-item">' +
-                        '<h4 class="list-group-item-heading">@{{ item.name }}</h4>' +
-                            '<p class="list-group-item-text">@{{ item.name }}</p>' +
-                            '<p class="list-group-item-text">@{{ item.latitude }} @{{ item.longitude }}</p>' +
-                       '</a>'
+            props: ['items'],
+            template: "#item-list-template",
+            // data: function() {
+            //     return item
+            // },
+            methods: {
+                details: function() {
+                    // console.log('item', item)
+                    // console.log($this.item)
+                    // alert(item.name)
+
+                }
+            }
+
+
+
         })
 
 
         list = new Vue({
             el: '#list',
-            data: data
+            data: data,
+            /*
+            methods: {
+                details: function() {
+                    // console.log('item', item)
+                    // console.log($this.item)
+                    // alert('here')
+
+                }
+            }
+            */
+
         });
 
         // get map bounds
@@ -286,7 +315,7 @@
 
                     for(var i = 0; i < response.data.length; i++) {
                         response.data[i] = addMarker(response.data[i])
-                        console.log(response.data[i])
+                        // console.log(response.data[i])
 
                         clearMarkers()
 
