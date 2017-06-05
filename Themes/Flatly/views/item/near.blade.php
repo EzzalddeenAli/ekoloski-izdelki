@@ -63,210 +63,22 @@
 
 @section('scripts')
     <script type="text/javascript"
-            src="https://maps.googleapis.com/maps/api/js?key= AIzaSyBgfF2N2CYEbRfUYf4-YuIxx8g00ehWBWk"></script>
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgfF2N2CYEbRfUYf4-YuIxx8g00ehWBWk"></script>
 
     <script>
 
         var map;
         var lastOpenedInfowindow = null;
+        var markers = [];
         var list; // vue app
-
-        function randomGeo(center, radius) {
-
-            var y0 = center.latitude;
-            var x0 = center.longitude;
-            var rd = radius / 111300;
-
-            var u = Math.random();
-            var v = Math.random();
-
-            var w = rd * Math.sqrt(u);
-            var t = 2 * Math.PI * v;
-            var x = w * Math.cos(t);
-            var y = w * Math.sin(t);
-
-
-            return {
-                'latitude': y + y0,
-                'longitude': x + x0
-            };
-        }
-
-
         // image should be taken from same domain else is not shown
         // var image = '/static/images/pin-small.png';
 
-        /**
-         * Get location from browser location.
-         */
-        function geoFindMe() {
-
-            if (!navigator.geolocation) {
-                console.log("Geolocation is not supported by your browser");
-                return;
-            }
-
-            function success(position) {
-                getItems({
-                    latitude: position.coords.latitude,
-                    longitude: position.coords.longitude
-                });
-            }
-
-            function error() {
-                console.log("Unable to retrieve your location");
-            }
-
-            navigator.geolocation.getCurrentPosition(success, error);
-        }
-
-
-        /**
-         * @param data
-         */
-        function getItems(data) {
-
-
-            var userLocation = {
-                latitude: 11.11,
-                longitude: 12.11
-            }
-
-
-            /*
-             //Clear previous results
-             var radioGroup = $(".radioGroupDealers");
-             radioGroup.empty();
-
-             // Get all dealers (if parameter not set only ecommerce dealers will be returned)
-             data.all = 1;
-
-             var prefix = $("html").data('prefix');
-
-             $.ajax({
-             type: "GET",
-             url: '/' + prefix + '/dealer-list',
-             data: data,
-             success: function (resp) {
-
-             if (!resp.success) {
-             $('#searchDealer').addClass('error');
-             } else {
-             $('#searchDealer').removeClass('error');
-
-             // deleteMarkers();
-
-             // save to global var
-             dealers = resp.data.dealers;
-
-             if (dealers.length > 0) {
-             var i;
-             for (i = 0; i < dealers.length; i++) {
-             radioGroup.append(dealers[i].html);
-             dealers[i] = addMarker(dealers[i]);
-             }
-             }
-
-             // center map to center
-
-             showMarkers();
-             setBounds();
-
-             $(".dealersSearchPaginator").show();
-
-             }
-             }
-             });
-             */
-        }
-
-        /**
-         * Find from search input google results
-         * @param array
-         * @param type
-         */
-        function findInGoogleResult(array, type) {
-            return _.find(array, function (element) {
-                return _.indexOf(element.types, type) != -1;
-            });
-        }
-
-        //
-        // add marker to object item
-        //
-        function addMarker(item) {
-
-            var position = {
-                lat: parseFloat(item.geopoint.latitude),
-                lng: parseFloat(item.geopoint.longitude)
-            };
-
-            var marker = new google.maps.Marker({
-                position: position,
-                animation: google.maps.Animation.DROP,
-                icon: image,
-                map: null
-            });
-
-            marker['infowindow'] = new google.maps.InfoWindow({
-                content: item.bubble
-            });
-
-            google.maps.event.addListener(marker, 'click', function () {
-                closeLastOpenedInfowindow();
-                this['infowindow'].open(map, this);
-                lastOpenedInfowindow = this['infowindow'];
-
-                var n = 0;
-                // show right page : TODO: refactor paginator
-
-            });
-
-            item['marker'] = marker;
-
-            return dealer;
-            // markers.push(marker);
-        }
-
-        // Sets the map on all markers in the array.
-        function setMapOnAll(map) {
-            for (var i = 0; i < items.length; i++) {
-                items[i]['marker'].setMap(map);
-            }
-        }
-
-        // Removes the markers from the map, but keeps them in the array.
-        function clearMarkers() {
-            setMapOnAll(null);
-        }
-
-        // Shows any markers currently in the array.
-        function showMarkers() {
-            setMapOnAll(map);
-        }
-
-        // Deletes all markers in the array by removing references to them.
-        function deleteMarkers() {
-            clearMarkers();
-        }
-
-
-        function closeLastOpenedInfowindow() {
-            if (lastOpenedInfowindow)
-                lastOpenedInfowindow.close();
-        }
-
-        // Set bounds of map so that all markers are visible.
-        function setBounds() {
-            var bounds = new google.maps.LatLngBounds();
-
-            for (var i = 0; i < items.length; i++) {
-                bounds.extend(items[i]['marker'].getPosition());
-            }
-
-            map.fitBounds(bounds);
-        }
-
+        var data = {
+            items: [
+                //  { id: 0, text: 'Loading example', title: 'Use Search or Move zoom, scroll to location' },
+            ]
+        };
 
         var KC = {
             lat: 50.232934,
@@ -274,7 +86,7 @@
         };
 
         map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 16,
+            zoom: 13,
             center: KC,
             styles: [{
                 "featureType": "landscape.natural",
@@ -300,36 +112,204 @@
         });
 
 
+        /**
+         * Get location from browser location.
+         */
+        function geoFindMe() {
+
+            if (!navigator.geolocation) {
+                console.log("Geolocation is not supported by your browser");
+                return;
+            }
+
+            function success(position) {
+                /*
+                getItems({
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude
+                });
+                */
+            }
+
+            function error() {
+                console.log("Unable to retrieve your location");
+            }
+
+            navigator.geolocation.getCurrentPosition(success, error);
+        }
+
+
+        /**
+         * @param data
+         */
+        function getItems(data) {
+
+            var userLocation = {
+                latitude: 11.11,
+                longitude: 12.11
+            }
+
+        }
+
+        /**
+         * Find from search input google results
+         * @param array
+         * @param type
+         */
+        function findInGoogleResult(array, type) {
+            return _.find(array, function (element) {
+                return _.indexOf(element.types, type) != -1;
+            });
+        }
+
+        // add marker to object item
+        function addMarker(item) {
+
+            var position = {
+                lat: parseFloat(item.latitude),
+                lng: parseFloat(item.longitude)
+            };
+
+            var marker = new google.maps.Marker({
+                position: position,
+                // animation: google.maps.Animation.DROP,
+                // icon: image,
+                map: null
+            });
+
+            /*
+            marker['infowindow'] = new google.maps.InfoWindow({
+                content: item.bubble
+            });
+            */
+
+            /*
+            google.maps.event.addListener(marker, 'click', function () {
+                closeLastOpenedInfowindow();
+                this['infowindow'].open(map, this);
+                lastOpenedInfowindow = this['infowindow'];
+
+                var n = 0;
+                // show right page : TODO: refactor paginator
+
+            });
+            */
+
+            item['marker'] = marker;
+
+            return item;
+            // markers.push(marker);
+        }
+
+        // Sets the map on all markers in the array.
+        function setMapOnAll(map) {
+
+            // console.log(map)
+            // console.log(data.items)
+
+            for (var i = 0; i < data.items.length; i++) {
+                data.items[i]['marker'].setMap(map);
+            }
+
+        }
+
+        // Removes the markers from the map, but keeps them in the array.
+        function clearMarkers() {
+            setMapOnAll(null);
+        }
+
+        // Shows any markers currently in the array.
+        function showMarkers(items) {
+            setMapOnAll(items);
+        }
+
+        // Deletes all markers in the array by removing references to them.
+        function deleteMarkers() {
+            clearMarkers();
+        }
+
+
+        function closeLastOpenedInfowindow() {
+            if (lastOpenedInfowindow)
+                lastOpenedInfowindow.close();
+        }
+
+        // Set bounds of map so that all markers are visible.
+        function setBounds() {
+            var bounds = new google.maps.LatLngBounds();
+
+            for (var i = 0; i < items.length; i++) {
+                bounds.extend(items[i]['marker'].getPosition());
+            }
+
+            map.fitBounds(bounds);
+        }
+
+
         Vue.component('list-item', {
             props: ['item'],
             template: '<a href="#" class="list-group-item">' +
-                        '<h4 class="list-group-item-heading">@{{ item.title }}</h4>' +
-                            '<p class="list-group-item-text">@{{ item.text }}</p></a>'
+                        '<h4 class="list-group-item-heading">@{{ item.name }}</h4>' +
+                            '<p class="list-group-item-text">@{{ item.name }}</p>' +
+                            '<p class="list-group-item-text">@{{ item.latitude }} @{{ item.longitude }}</p>' +
+                       '</a>'
         })
 
-
-        var data = {
-            items: [
-                { id: 0, text: 'Vegetables', title: 'Some Title' },
-                { id: 1, text: 'Apple', title: 'Some Title' },
-                { id: 1, text: 'Apple', title: 'Some Title' },
-                { id: 1, text: 'Apple', title: 'Some Title' },
-                { id: 1, text: 'Apple', title: 'Some Title' },
-                { id: 1, text: 'Apple', title: 'Some Title' },
-                { id: 1, text: 'Apple', title: 'Some Title' },
-                { id: 1, text: 'Apple', title: 'Some Title' },
-                { id: 1, text: 'Apple', title: 'Some Title' },
-                { id: 1, text: 'Apple', title: 'Some Title' },
-                { id: 2, text: 'Vine', title: 'Some Title' }
-            ]
-        };
 
         list = new Vue({
             el: '#list',
             data: data
         });
 
+        // get map bounds
+        var bounds = map.getBounds()
 
+
+        // console.log('bounds', bounds)
+
+        // https://developers.google.com/maps/documentation/javascript/events
+        map.addListener('idle', function() {
+
+            // 3 seconds after the center of the map has changed, pan back to the
+            // marker.
+            // window.setTimeout(function() {
+                // map.panTo(marker.getPosition());
+                // console.log(e.latLng);
+            // }, 1000);
+
+            // console.log(map.getBounds());
+
+            axios.post('/en/item/bounds', map.getBounds())
+                .then(function(response) {
+
+                    // console.log(response)
+                    // console.log(response.data.length)
+
+                    data.items = []
+
+                    for(var i = 0; i < response.data.length; i++) {
+                        response.data[i] = addMarker(response.data[i])
+                        console.log(response.data[i])
+
+                        clearMarkers()
+
+                        data.items.push(
+                            response.data[i]
+                        )
+
+                        // show markers
+                        setMapOnAll(map)
+
+                    }
+
+                })
+                .catch(function(error) {
+                    console.log(error)
+                })
+
+        });
+
+        /*
         data.items = [
             { id: 0, text: 'Vegetables', title: 'Some Title' }
         ]
@@ -338,9 +318,7 @@
         data.items.push(
             { id: 0, text: 'Vegetables', title: 'Some Title' }
         )
-
-
-
+        */
 
 
         // list.data([

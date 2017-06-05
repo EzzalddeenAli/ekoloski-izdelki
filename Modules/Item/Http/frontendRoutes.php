@@ -9,5 +9,8 @@ $router->group(['prefix' => 'item'], function (Router $router) {
     $router->get('show/{slug}', ['as' => 'item.show', 'uses' => 'PublicController@show']);
     $router->get('near', ['as' => 'item.show', 'uses' => 'PublicController@near']);
 
+
+    $router->any('bounds', ['as' => 'item.bounds', 'uses' => 'ApiController@bounds']);
+
 });
 

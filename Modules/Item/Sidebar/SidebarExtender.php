@@ -47,7 +47,17 @@ class SidebarExtender implements \Maatwebsite\Sidebar\SidebarExtender
                         $this->auth->hasAccess('item.items.index')
                     );
                 });
+                $item->item(trans('item::openingtimes.title.openingtimes'), function (Item $item) {
+                    $item->icon('fa fa-copy');
+                    $item->weight(0);
+                    $item->append('admin.item.openingtime.create');
+                    $item->route('admin.item.openingtime.index');
+                    $item->authorize(
+                        $this->auth->hasAccess('item.openingtimes.index')
+                    );
+                });
 // append
+
 
             });
         });

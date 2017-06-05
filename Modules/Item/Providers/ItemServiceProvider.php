@@ -54,7 +54,20 @@ class ItemServiceProvider extends ServiceProvider
                 return new \Modules\Item\Repositories\Cache\CacheItemDecorator($repository);
             }
         );
+        $this->app->bind(
+            'Modules\Item\Repositories\OpeningTimeRepository',
+            function () {
+                $repository = new \Modules\Item\Repositories\Eloquent\EloquentOpeningTimeRepository(new \Modules\Item\Entities\OpeningTime());
+
+                if (! config('app.cache')) {
+                    return $repository;
+                }
+
+                return new \Modules\Item\Repositories\Cache\CacheOpeningTimeDecorator($repository);
+            }
+        );
 // add bindings
+
 
     }
 }

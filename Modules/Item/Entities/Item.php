@@ -11,5 +11,13 @@ class Item extends Model
 
     protected $table = 'item__items';
     public $translatedAttributes = [];
-    protected $fillable = [];
+    protected $fillable = ['name', 'description', 'price'];
+
+    /*
+    public function posts(Item $item) {
+        $this = $item;
+        $this->save();
+    }
+    */
+
 }
