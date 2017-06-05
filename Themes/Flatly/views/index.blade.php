@@ -5,7 +5,9 @@ Projects | @parent
 @stop
 
 @section('content')
-<div class="row">
-    <h1>Hello World!</h1>
-</div>
+    <div class="container">
+        <div class="row">
+            <h1>Hello World!</h1>
+        </div>
+    </div>
 @stop

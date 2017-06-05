@@ -9,23 +9,24 @@
 @stop
 
 @section('content')
-    <div class="row">
-    </div>
-
-    <div class="row">
-        <div class="alert alert-danger text-center">
-            {{ trans('billing::newsletter.subscribe.token-not-found') }}
+    <div class="container">
+        <div class="row">
         </div>
 
-        {{--
-        <p>{{ trans('billing::newsletter.subscribe.generate new subscription')  }}</p>
-        --}}
+        <div class="row">
+            <div class="alert alert-danger text-center">
+                {{ trans('billing::newsletter.subscribe.token-not-found') }}
+            </div>
 
-        @include('newsletter.partials.registration')
+            {{--
+            <p>{{ trans('billing::newsletter.subscribe.generate new subscription')  }}</p>
+            --}}
+
+            @include('newsletter.partials.registration')
+        </div>
+
+        <div class="row">
+
+        </div>
     </div>
-
-    <div class="row">
-
-    </div>
-
 @stop

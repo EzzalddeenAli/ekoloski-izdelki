@@ -9,11 +9,12 @@
 @stop
 
 @section('content')
-    <div class="row">
-    </div>
+    <div class="container">
+        <div class="row">
+        </div>
 
-    <div class="row">
-        <h1 class="text-center">{{ trans('billing::newsletter.confirm.success') }}</h1>
+        <div class="row">
+            <h1 class="text-center">{{ trans('billing::newsletter.confirm.success') }}</h1>
+        </div>
     </div>
-
 @stop

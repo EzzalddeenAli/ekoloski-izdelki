@@ -12,26 +12,28 @@
     @stop
 
     @section('content')
-        <div class="row">
-            <h1>{{ $item->name }}</h1>
-            {!! $item->description !!}
+        <div class="container">
+            <div class="row">
+                <h1>{{ $item->name }}</h1>
+                {!! $item->description !!}
 
-            <form action="{{ route('store.pay') }}" method="post">
-                {{ csrf_field() }}
+                <form action="{{ route('store.pay') }}" method="post">
+                    {{ csrf_field() }}
 
-                <script
-                        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                        data-key="{{ env('STRIPE_KEY') }}"
-                        data-amount="10"
-                        data-name="Stripe.com"
-                        data-description="Widget"
-                        data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-                        data-locale="auto"
-                        data-zip-code="true">
-                </script>
+                    <script
+                            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                            data-key="{{ env('STRIPE_KEY') }}"
+                            data-amount="10"
+                            data-name="Stripe.com"
+                            data-description="Widget"
+                            data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                            data-locale="auto"
+                            data-zip-code="true">
+                    </script>
 
-            </form>
+                </form>
 
+            </div>
         </div>
     @stop
 
