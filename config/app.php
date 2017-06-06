@@ -192,6 +192,8 @@ return [
 
         Laravel\Cashier\CashierServiceProvider::class,
         Nwidart\Modules\LaravelModulesServiceProvider::class,
+        Nexmo\Laravel\NexmoServiceProvider::class
+
 
     ],
 

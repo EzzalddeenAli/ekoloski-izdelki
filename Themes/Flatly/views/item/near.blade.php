@@ -46,7 +46,6 @@
 
         <template id="item-list-template">
             <div class="list-group" style="height: 550px; overflow-y: scroll">
-
                 <a href="#"
                    class="list-group-item"
                    v-on:click="details"
@@ -56,12 +55,12 @@
                     <p class="list-group-item-text">@{{ item.name }}</p>
                     <p class="list-group-item-text">@{{ item.latitude }} @{{ item.longitude }}</p>
                 </a>
-
             </div>
-
         </template>
 
     </div>
+
+</div>
 
 
 @stop
@@ -69,7 +68,6 @@
 @section('scripts')
     <script type="text/javascript"
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgfF2N2CYEbRfUYf4-YuIxx8g00ehWBWk"></script>
-
     <script>
 
         var map;
@@ -81,7 +79,7 @@
 
         var data = {
             items: [
-                //  { id: 0, text: 'Loading example', title: 'Use Search or Move zoom, scroll to location' },
+                { id: 0, text: 'Loading example', title: 'Use Search or Move zoom, scroll to location' },
             ]
         };
 
@@ -182,28 +180,9 @@
                 map: null
             });
 
-            /*
-            marker['infowindow'] = new google.maps.InfoWindow({
-                content: item.bubble
-            });
-            */
-
-            /*
-            google.maps.event.addListener(marker, 'click', function () {
-                closeLastOpenedInfowindow();
-                this['infowindow'].open(map, this);
-                lastOpenedInfowindow = this['infowindow'];
-
-                var n = 0;
-                // show right page : TODO: refactor paginator
-
-            });
-            */
-
             item['marker'] = marker;
 
             return item;
-            // markers.push(marker);
         }
 
         // Sets the map on all markers in the array.
@@ -222,17 +201,6 @@
         function clearMarkers() {
             setMapOnAll(null);
         }
-
-        // Shows any markers currently in the array.
-        function showMarkers(items) {
-            setMapOnAll(items);
-        }
-
-        // Deletes all markers in the array by removing references to them.
-        function deleteMarkers() {
-            clearMarkers();
-        }
-
 
         function closeLastOpenedInfowindow() {
             if (lastOpenedInfowindow)
@@ -262,11 +230,8 @@
                     // console.log('item', item)
                     // console.log($this.item)
                     // alert(item.name)
-
                 }
             }
-
-
 
         })
 
@@ -295,15 +260,6 @@
 
         // https://developers.google.com/maps/documentation/javascript/events
         map.addListener('idle', function() {
-
-            // 3 seconds after the center of the map has changed, pan back to the
-            // marker.
-            // window.setTimeout(function() {
-                // map.panTo(marker.getPosition());
-                // console.log(e.latLng);
-            // }, 1000);
-
-            // console.log(map.getBounds());
 
             axios.post('/en/item/bounds', map.getBounds())
                 .then(function(response) {
@@ -334,138 +290,6 @@
                 })
 
         });
-
-        /*
-        data.items = [
-            { id: 0, text: 'Vegetables', title: 'Some Title' }
-        ]
-
-
-        data.items.push(
-            { id: 0, text: 'Vegetables', title: 'Some Title' }
-        )
-        */
-
-
-        // list.data([
-        //    { id: 0, text: 'Vegetables', title: 'Some Title' }
-        // ]);
-
-
-        // use browser coordinates
-
-        // geoFindMe();
-
-        /////////////////////////////////////////////////////////////////////////////////////
-        // $(document).ready(function () {
-
-        // initial center on KC 50.232934, 11.333616
-        // var KC = {
-        //    lat: 50.232934,
-        //     lng: 11.333616
-        // };
-
-
-        /*
-         getItems({
-         latitude: 50.232934,
-         longitude: 11.333616
-         });
-         */
-
-        // use search input
-        /*
-         $("#searchDealer")
-         .geocomplete({
-         country: $("input#country").val()
-         })
-         .bind("geocode:result", function (event, result) {
-
-         var query = {
-         latitude: result.geometry.location.lat(),
-         longitude: result.geometry.location.lng()
-         };
-
-         map.panTo({
-         lat: query.latitude,
-         lng: query.longitude
-         });
-
-         getItems(query);
-
-         })
-         .bind("geocode:error", function (event, status) {
-         console.log("ERROR: " + status);
-         })
-         .bind("geocode:multiple", function (event, results) {
-         console.log("Multiple: " + results.length + " results found");
-         });
-
-         */
-
-        // click on element in list
-        /*
-         $("body").on("click", ".formItem", function () {
-
-
-         var id = $(this).data('id');
-
-         for(var n = 0; n < dealers.length; n++) {
-
-         if(dealers[n].id == id) {
-
-         closeLastOpenedInfowindow();
-         dealers[n]['marker']['infowindow'].open(map, dealers[n]['marker']);
-         lastOpenedInfowindow = dealers[n]['marker']['infowindow'];
-         map.panTo(dealers[n]['marker'].getPosition());
-
-         break;
-         }
-         }
-
-         // set active to clicked radio-item
-         $('div.form-group').find('.formItem').each(function() {
-         if($(this).hasClass("active"))
-         $(this).removeClass("active");
-         });
-
-         $(this).addClass('active');
-
-         });
-
-         */
-
-        /*
-         $("a.dealersPage").click(function(e) {
-
-         var page = $.trim($(this).html());
-
-         $("a.dealersPage").each(function() {
-         if($(this).hasClass("active"))
-         $(this).removeClass("active");
-         });
-
-         var endDealer = page * 5;
-         var startDealer = endDealer - 5;
-
-         $('div.radioGroupDealers .formItem').each(function (e) {
-         var n = $(this).data('n');
-
-         if(n > startDealer && n <= endDealer)
-         $(this).show();
-         else
-         $(this).hide();
-
-         });
-
-         $(this).addClass("active");
-         e.preventDefault(); // seems not to work
-
-         });
-         */
-
-
-        // });
 
 
     </script>

@@ -31,3 +31,8 @@ $router->get('legal', ['as' => 'billing.legal.general', 'uses' => 'LegalControll
 
 // route to set frontend_token
 $router->any('log/set/frontend/{token}', ['as' => 'log.set.frontend.token', 'uses' => 'LogController@setFrontendToken']);
+
+// test SMS
+$router->get('sms/test', ['as' => 'billing.sms.test', 'uses' => 'SMSController@test']);
+$router->post('sms/send', ['as' => 'billing.sms.send', 'uses' => 'SMSController@send']);
+
