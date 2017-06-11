@@ -23,5 +23,6 @@ return [
         'text' => "Sincerely team ekoloski-izdelki.si"
     ]
 
+
 ];
 
