@@ -1,3 +1,11 @@
+<?php
+
+    // getting $currentUser variable
+    // https://asgardcms.com/docs/v2/user-module/users
+    view()->composer('layouts.demo', \Modules\Core\Composers\CurrentUserViewComposer::class);
+?>
+
+
 <!DOCTYPE html>
 <html data-token="{{ \Illuminate\Support\Facades\Session::get('frontend_token') }}">
     <head lang="{{ LaravelLocalization::setLocale() }}">
@@ -14,11 +22,12 @@
         {!! Theme::style('css/main.css') !!}
     </head>
     <body>
+
+
+
         @include('partials.navigation')
 
-
         @yield('content')
-
 
         @include('partials.footer')
 

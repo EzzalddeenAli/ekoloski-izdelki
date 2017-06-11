@@ -10,6 +10,27 @@
         </div>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
             @menu('main')
+
+            <ul class="nav navbar-nav pull-right">
+                <li>
+                    @if($currentUser)
+
+                    <a href="/{{ Config::get('app.locale') }}/backend">
+                        <i class="fa fa-user">
+                        </i>
+                        {{ $currentUser->first_name }} {{ $currentUser->last_name }}
+
+                    </a>
+                    @else
+                        <a href="{{ route('login')  }}">
+                            <i class="fa fa-user">
+                            </i>
+                            {{ trans('account')  }}
+                        </a>
+                    @endif
+                </li>
+            </ul>
+
         </div>
     </div>
 </nav>
