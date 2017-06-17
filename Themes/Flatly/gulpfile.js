@@ -48,6 +48,7 @@ elixir(function (mix) {
         './../../bower_components/fingerprintjs2/dist/fingerprint2.min.js',
         './../../bower_components/vue/dist/vue.js',
         './../../bower_components/axios/dist/axios.js',
+        './../../resources/assets/js/near.js', // for goole maps to find near items
         //'./../../bower_components/fingerprintjs2/fingerprintjs2.js',
         // '/js/bootswatch.js'
     ], '../../public/themes/' + themeInfo.name.toLowerCase() + '/js', 'resources');

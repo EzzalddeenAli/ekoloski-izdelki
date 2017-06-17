@@ -32,6 +32,8 @@
         @include('partials.footer')
 
         {!! Theme::script('js/all.js') !!}
+
+
         @yield('scripts')
 
         <script>

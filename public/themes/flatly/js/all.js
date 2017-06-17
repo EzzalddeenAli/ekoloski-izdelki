@@ -13264,4 +13264,8 @@ return /******/ (function(modules) { // webpackBootstrap
 });
 ;
 //# sourceMappingURL=axios.map
+/**
+ * Created by bojan on 6/17/17.
+ */
+
 //# sourceMappingURL=all.js.map
