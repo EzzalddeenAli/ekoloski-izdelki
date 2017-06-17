@@ -1,18 +1,26 @@
 var map;
 var lastOpenedInfowindow = null;
+var itemsBefore = 0; // only refresh list if number of items changed
+
 var markers = [];
+
+
+
+
 var list; // vue app
 // image should be taken from same domain else is not shown
 // var image = '/static/images/pin-small.png';
 
 var data = {
     items: [
+        /*
         {   id: 0,
             text: 'Loading example',
             title: 'Use Search or Move zoom, scroll to location',
             latitude: 11.1,
             longitude: 11.1
         },
+        */
     ]
 };
 
@@ -125,8 +133,14 @@ function setMapOnAll(map) {
     // console.log(data.items)
 
     for (var i = 0; i < data.items.length; i++) {
-        data.items[i]['marker'].setMap(map);
+        marker = data.items[i]['marker'];
+
+        console.log('add map:', map );
+        console.log('to marker', marker);
+        marker.setMap(map);
+
     }
+
 
 }
 
@@ -197,25 +211,45 @@ map.addListener('idle', function() {
     axios.post('/en/item/bounds', map.getBounds())
         .then(function(response) {
 
+            console.log('was idle post', map.getBounds());
             // console.log(response)
             // console.log(response.data.length)
 
-            data.items = []
 
-            for(var i = 0; i < response.data.length; i++) {
-                response.data[i] = addMarker(response.data[i])
-                // console.log(response.data[i])
+            dataItems = data.items.length;
+            console.log('itemsBefore', dataItems)
+
+
+
+
+
+            console.log('itemsAfter', response.data.length)
+
+
+
+            if(response.data.length > 0 && response.data.length != itemsBefore) {
 
                 clearMarkers()
 
-                data.items.push(
-                    response.data[i]
-                )
+                data.items = []
+
+                for(var i = 0; i < response.data.length; i++) {
+                    response.data[i] = addMarker(response.data[i])
+                    // console.log(response.data[i])
+                    data.items.push(
+                        response.data[i]
+                    )
+
+                    console.log('', data.items);
+
+                }
+
 
                 // show markers
                 setMapOnAll(map)
-
             }
+
+
 
         })
         .catch(function(error) {
