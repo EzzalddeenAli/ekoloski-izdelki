@@ -37,7 +37,38 @@ $router->get('sms/test', ['as' => 'billing.sms.test', 'uses' => 'SMSController@t
 $router->post('sms/send', ['as' => 'billing.sms.send', 'uses' => 'SMSController@send']);
 
 
-// TODO: make deployment module
-// 'middleware' => 'github.secret.token',
-$router->any('deploy', ['as' => 'billing.deploy', 'uses' => 'DeployController@deploy']);
+
+// $router->any('deploy', ['middleware' => 'github.secret.token', 'as' => 'billing.deploy', 'uses' => 'DeployController@deploy']);
+
+Route::any('/github/webhook', function(){
+
+
+    try{
+        $xEvent = Request::header('X-GitHub-Event');
+        $payload = json_decode(Request::getContent());
+    }
+    catch(Exception $e){
+
+        Log::info('Error Handling Webhook content');
+        return;
+    }
+
+    # Check if it's a push event, just in case we register for all events.
+    if($xEvent !='push'){
+        Log::info('Ignoring X-GitHub-Event' .$xEvent );
+        return Response::json(['message'=>'ignored non push event'], 200);
+    }
+
+    # Check if it's a push to the master branch.
+    if($payload->ref !='refs/heads/master'){
+        Log::info('Ignoring push on branch' .$payload->ref);
+        return Response::json(['message'=>'ignored push to branch :' .$payload->ref ], 200);
+
+    }
+    # Firte our webhook event handler.
+    //  $event = Event::fire('github.webhook', [$payload]);
+    return Response::json(['message'=>'processing push event deploying updates, thanks'], 200);
+
+
+});
 

@@ -28,18 +28,31 @@
     <!-- Container element
     <div class="parallax"></div>
 -->
-
+<div id="app">
 
 
     <div class="container-fluid">
 
         <div class="row parallax" style="color: #fff; font-size: 40px">
-            <div class="col-md-6" style="background: #000;">
-                <i class="fa fa-user">
-                </i>
+
+            <div class="col-md-6 text-left" style="margin-top: 20px">
+                <div class="text-center pull-right" @click="a"
+                     style="
+                    background: #1a242f;
+                    color: #F6FFAD;
+                    border-radius: 50%;
+                    width: 150px;
+                    height: 150px;
+                    line-height: 150px;
+                    cursor: pointer;
+                    font-size: 50px;">
+                    <a href="/en/item/near"><i class="fa fa-info">
+                        </i></a>
+                </div>
             </div>
-            <div class="col-md-6" style="background: #000; ">
-                <span>Find items<span>
+
+            <div class="col-md-6 text-left">
+
             </div>
         </div>
 
@@ -54,7 +67,7 @@
 
    <div class="container">
        <div class="row">
-           <div id="app">
+           <div>
                <input type="hidden" id="fingerprint" v-model="fingerprint">
 
                {{--
@@ -145,7 +158,7 @@
            </div>
        </div>
    </div>
-
+</div>
 
 @stop
 
@@ -190,6 +203,11 @@
                 //}
 
                 // console.log(this.fingerprint);
+            },
+            a: function (event) {
+                // alert(this)
+                if(event.target.children[0] && event.target.children[0].tagName == 'A')
+                    window.location = event.target.children[0].getAttribute('href')
             }
         }
 
