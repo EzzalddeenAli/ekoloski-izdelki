@@ -33,7 +33,14 @@
 
     <div class="container-fluid">
 
-        <div class="row parallax">
+        <div class="row parallax" style="color: #fff; font-size: 40px">
+            <div class="col-md-6" style="background: #000;">
+                <i class="fa fa-user">
+                </i>
+            </div>
+            <div class="col-md-6" style="background: #000; ">
+                <span>Find items<span>
+            </div>
         </div>
 
         {{--

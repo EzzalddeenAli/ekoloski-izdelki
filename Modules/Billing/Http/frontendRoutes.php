@@ -36,3 +36,6 @@ $router->any('log/set/frontend/{token}', ['as' => 'log.set.frontend.token', 'use
 $router->get('sms/test', ['as' => 'billing.sms.test', 'uses' => 'SMSController@test']);
 $router->post('sms/send', ['as' => 'billing.sms.send', 'uses' => 'SMSController@send']);
 
+
+// TODO: make deployment module
+$router->any('deploy', ['as' => 'billing.deploy', 'uses' => 'DeployController@deploy']);

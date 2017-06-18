@@ -69,7 +69,14 @@ Vue.component('list-item', {
         details: function() {
             // console.log('item', item)
             // console.log($this.item)
-            // alert(item.name)
+            // alert(this.name)
+
+            // get item detail and display it
+            axios.post('/en/item/get', map.getBounds())
+                .then(function(response) {
+
+                });
+
         }
     }
 
@@ -244,7 +251,6 @@ map.addListener('idle', function() {
                 // show markers
                 setMapOnAll(map)
             }
-
 
 
         })

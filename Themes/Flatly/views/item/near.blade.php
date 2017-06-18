@@ -13,14 +13,17 @@
 @stop
 
 @section('content')
-<div id="app">
+
+    <style>
+        .list-group {
+            max-height: 550px;
+            overflow-y: scroll;
+        }
+    </style>
+    <div id="app">
 
 
     <div class="container-fluid">
-
-        <div class="row text-center">
-            <p>Your location: </p>
-        </div>
 
         <div class="row">
             <div class="col-md-4">
@@ -58,10 +61,16 @@
             </div>
         </div>
 
+        <div class="container">
+            <div class="row">
+                Loading...
+            </div>
+        </div>
+
 
         <template id="list-item">
             <div class="list-item" v-show="show">
-                <a href="#" class="list-group-item">
+                <a href="#" class="list-group-item" @click="details">
                     <span @click="show = false">★</span>@{{ name }}
                 </a>
             </div>
