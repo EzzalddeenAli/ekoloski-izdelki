@@ -15,10 +15,15 @@
 @section('content')
 <div id="app">
 
+
     <div class="container-fluid">
+
+        <div class="row text-center">
+            <p>Your location: </p>
+        </div>
+
         <div class="row">
             <div class="col-md-4">
-
                 <div id="list">
 
                     <div class="form-group">
@@ -31,9 +36,17 @@
                     </div>
 
                     <div class="bs-component">
-                        <list-item v-for="item in items" :key="item.id">
-                            Test
-                        </list-item>
+                        <div class="list-group">
+                            <list-item
+                                    v-for="item in items"
+                                    :key="item.id"
+                                    :id="item.id"
+                                    :name="item.name"
+                                    :latitude="item.latitude"
+                                    :longitude="item.longitude"
+                            >
+                            </list-item>
+                        </div>
                     </div>
 
                 </div>
@@ -47,9 +60,10 @@
 
 
         <template id="list-item">
-            <div class="list-group">
-                <slot></slot>
-                <span>Some text</span>
+            <div class="list-item" v-show="show">
+                <a href="#" class="list-group-item">
+                    <span @click="show = false">★</span>@{{ name }}
+                </a>
             </div>
         </template>
 

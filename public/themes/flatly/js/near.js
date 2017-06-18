@@ -4,9 +4,6 @@ var itemsBefore = 0; // only refresh list if number of items changed
 
 var markers = [];
 
-
-
-
 var list; // vue app
 // image should be taken from same domain else is not shown
 // var image = '/static/images/pin-small.png';
@@ -54,6 +51,54 @@ map = new google.maps.Map(document.getElementById('map'), {
         "stylers": [{"visibility": "on"}, {"lightness": 700}]
     }, {"featureType": "water", "elementType": "all", "stylers": [{"color": "#7dcdcd"}]}]
 });
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// vue
+
+
+Vue.component('list-item', {
+    props: ['id', 'name', 'latitude', 'longitude'],
+    template: "#list-item",
+    data: function() {
+         return {
+             show: true
+         };
+    },
+    methods: {
+        details: function() {
+            // console.log('item', item)
+            // console.log($this.item)
+            // alert(item.name)
+        }
+    }
+
+})
+
+
+list = new Vue({
+    el: '#list',
+    data: data,
+    /*
+     methods: {
+     details: function() {
+     // console.log('item', item)
+     // console.log($this.item)
+     // alert('here')
+
+     }
+     }
+     */
+
+});
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+// get map bounds
+var bounds = map.getBounds()
+
+
 
 
 /**
@@ -129,18 +174,9 @@ function addMarker(item) {
 // Sets the map on all markers in the array.
 function setMapOnAll(map) {
 
-    // console.log(map)
-    // console.log(data.items)
-
     for (var i = 0; i < data.items.length; i++) {
-        marker = data.items[i]['marker'];
-
-        console.log('add map:', map );
-        console.log('to marker', marker);
-        marker.setMap(map);
-
+        data.items[i]['marker'].setMap(map);
     }
-
 
 }
 
@@ -166,41 +202,6 @@ function setBounds() {
 }
 
 
-Vue.component('list-item', {
-    props: ['id', 'name', 'latitude', 'longitude'],
-    template: "#list-item",
-    // data: function() {
-    //     return item
-    // },
-    methods: {
-        details: function() {
-            // console.log('item', item)
-            // console.log($this.item)
-            // alert(item.name)
-        }
-    }
-
-})
-
-
-list = new Vue({
-    el: '#list',
-    data: data,
-    /*
-     methods: {
-     details: function() {
-     // console.log('item', item)
-     // console.log($this.item)
-     // alert('here')
-
-     }
-     }
-     */
-
-});
-
-// get map bounds
-var bounds = map.getBounds()
 
 
 // console.log('bounds', bounds)
@@ -211,20 +212,15 @@ map.addListener('idle', function() {
     axios.post('/en/item/bounds', map.getBounds())
         .then(function(response) {
 
-            console.log('was idle post', map.getBounds());
+            // console.log('was idle post', map.getBounds());
             // console.log(response)
             // console.log(response.data.length)
 
 
             dataItems = data.items.length;
-            console.log('itemsBefore', dataItems)
 
-
-
-
-
-            console.log('itemsAfter', response.data.length)
-
+            // console.log('itemsBefore', dataItems)
+            // console.log('itemsAfter', response.data.length)
 
 
             if(response.data.length > 0 && response.data.length != itemsBefore) {
@@ -240,7 +236,7 @@ map.addListener('idle', function() {
                         response.data[i]
                     )
 
-                    console.log('', data.items);
+                    // console.log('', data.items);
 
                 }
 
