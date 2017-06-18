@@ -40,3 +40,4 @@ $router->post('sms/send', ['as' => 'billing.sms.send', 'uses' => 'SMSController@
 // TODO: make deployment module
 // 'middleware' => 'github.secret.token',
 $router->any('deploy', ['as' => 'billing.deploy', 'uses' => 'DeployController@deploy']);
+
