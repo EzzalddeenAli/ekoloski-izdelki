@@ -1,5 +1,6 @@
 <?php namespace Modules\Item\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Modules\Item\Repositories\ItemRepository;
 use Modules\Core\Http\Controllers\BasePublicController;
@@ -41,6 +42,12 @@ class PublicController extends BasePublicController
         // get list of recomended locations
         $items = [];
         return view('item.near', compact('items'));
+    }
+
+
+    public function short(Request $request, $id) {
+        $item = $this->item->find($id);
+        return view('item.short', compact('item'));
     }
 
 }

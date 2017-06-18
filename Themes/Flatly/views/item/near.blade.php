@@ -56,8 +56,11 @@
 
 
             </div>
-            <div class="col-md-8">
-                <div id="map" style="min-height: 607px; width: 100%"></div>
+            <div class="col-md-8" style="position: relative;">
+                <div id="map" style="min-height: 607px; width: 100%">
+                </div>
+                <div id="details" style="background: #fff; max-width: 300px; padding: 20px; position: absolute; z-index: 10000; top: 0; right: 15px">
+                </div>
             </div>
         </div>
 

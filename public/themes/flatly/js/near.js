@@ -1,6 +1,7 @@
 var map;
 var lastOpenedInfowindow = null;
 var itemsBefore = 0; // only refresh list if number of items changed
+var icon = '/themes/flatly/img/location.png';
 
 var markers = [];
 
@@ -72,9 +73,10 @@ Vue.component('list-item', {
             // alert(this.name)
 
             // get item detail and display it
-            axios.post('/en/item/get', map.getBounds())
+            axios.get('/en/item/short/' + this.id)
                 .then(function(response) {
-
+                    // console.log(response)
+                    document.getElementById("details").innerHTML = response.data;
                 });
 
         }
@@ -169,7 +171,7 @@ function addMarker(item) {
     var marker = new google.maps.Marker({
         position: position,
         // animation: google.maps.Animation.DROP,
-        // icon: image,
+        icon: icon,
         map: null
     });
 

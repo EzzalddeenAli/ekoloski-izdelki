@@ -33,11 +33,51 @@
 
     <div class="container-fluid">
 
-        <div class="row parallax" style="color: #fff; font-size: 40px">
+        <div class="row parallax" style="color: #fff;">
 
-            <div class="col-md-6 text-left" style="margin-top: 20px">
-                <div class="text-center pull-right" @click="a"
-                     style="
+            <div class="col-md-6">
+
+                <div class="pull-right text-center" style="background: #ffff; width: 180px">
+                    <br>
+                    <div class="text-center" @click="a"
+                    style="
+                        background: #1a242f;
+                        color: #F6FFAD;
+                        border-radius: 50%;
+                        width: 150px;
+                        height: 150px;
+                        margin: 0 auto;
+                        line-height: 150px;
+                        cursor: pointer;
+                        font-size: 50px;">
+                        <a href="/en/item/near">
+                            <i class="glyphicon glyphicon-map-marker"></i>
+                        </a>
+                    </div>
+
+                <div style="color: #000">
+                    <p>Find local products</p>
+                </div>
+
+            </div>
+
+
+
+            </div>
+
+            <div class="col-md-6" style="margin-top: 20px">
+                    <div style="height: 150px"></div>
+            </div>
+
+
+            <div class="col-md-6">
+
+            </div>
+
+            <div class="col-md-6" style="background: #ffff; width: 180px">
+                <br>
+                <div class="text-center pull-left" @click="a"
+                style="
                     background: #1a242f;
                     color: #F6FFAD;
                     border-radius: 50%;
@@ -45,16 +85,21 @@
                     height: 150px;
                     line-height: 150px;
                     cursor: pointer;
-                    font-size: 50px;">
-                    <a href="/en/item/near"><i class="fa fa-info">
-                        </i></a>
+                    ">
+                        <a href="/en/auth/register">
+                            <i class="fa fa-user" style="font-size: 50px;"></i> <br>
+                        </a>
+                </div>
+
+                <div style="color: #000" class="text-center">
+                    <p>Publish product</p>
                 </div>
             </div>
 
-            <div class="col-md-6 text-left">
 
-            </div>
         </div>
+
+
 
         {{--
         <div class="row">

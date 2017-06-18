@@ -49,5 +49,19 @@ class ApiController extends BasePublicController
 
     }
 
+
+    public function get(Request $request, $id) {
+
+        $item = $this->item->find(1);
+
+        $view = View::make('');
+
+        return [
+            'success' => true,
+            'data' => $item
+        ];
+
+    }
+
 }
 
