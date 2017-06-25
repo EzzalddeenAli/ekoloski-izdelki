@@ -37,6 +37,7 @@ $router->get('sms/test', ['as' => 'billing.sms.test', 'uses' => 'SMSController@t
 $router->post('sms/send', ['as' => 'billing.sms.send', 'uses' => 'SMSController@send']);
 
 
+$router->get('comment/create', ['as' => 'billing.comment.create', 'uses' => 'CommentsController@create']);
 
 // $router->any('deploy', ['middleware' => 'github.secret.token', 'as' => 'billing.deploy', 'uses' => 'DeployController@deploy']);
 
