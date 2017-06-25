@@ -33,11 +33,11 @@
 
     <div class="container-fluid">
 
-        <div class="row parallax" style="color: #fff;">
+        <div class="row parallax">
 
             <div class="col-md-6">
 
-                <div class="pull-right text-center" style="background: #ffff; width: 180px">
+                <div class="pull-right text-center">
                     <br>
                     <div class="text-center" @click="a"
                     style="
@@ -48,33 +48,24 @@
                         height: 150px;
                         margin: 0 auto;
                         line-height: 150px;
-                        cursor: pointer;
-                        font-size: 50px;">
-                        <a href="/en/item/near">
-                            <i class="glyphicon glyphicon-map-marker"></i>
-                        </a>
-                    </div>
-
-                <div style="color: #000">
-                    <p>Find local products</p>
+                        cursor: pointer; opacity: 0.9">
+                    <a href="/en/item/near">
+                        <!--<i class="glyphicon glyphicon-map-marker"></i> -->
+                        Find local products
+                    </a>
                 </div>
-
             </div>
 
-
-
+            <div class="col-md-6">
             </div>
 
-            <div class="col-md-6" style="margin-top: 20px">
-                    <div style="height: 150px"></div>
-            </div>
 
 
             <div class="col-md-6">
-
             </div>
 
-            <div class="col-md-6" style="background: #ffff; width: 180px">
+            <div class="col-md-6">
+
                 <br>
                 <div class="text-center pull-left" @click="a"
                 style="
@@ -84,29 +75,21 @@
                     width: 150px;
                     height: 150px;
                     line-height: 150px;
-                    cursor: pointer;
-                    ">
-                        <a href="/en/auth/register">
-                            <i class="fa fa-user" style="font-size: 50px;"></i> <br>
-                        </a>
-                </div>
+                    cursor: pointer; opacity: 0.9
+                ">
+                <a href="/en/auth/register">
+                    <!--<i class="fa fa-user" style="font-size: 50px;"></i>-->
+                    Publish product
+                </a>
+            </div>
 
-                <div style="color: #000" class="text-center">
-                    <p>Publish product</p>
-                </div>
             </div>
 
 
+
+
+
         </div>
-
-
-
-        {{--
-        <div class="row">
-            <h1>{{ $page->title }}</h1>
-            {!! $page->body !!}
-        </div>
-        --}}
 
     </div>
 

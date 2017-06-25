@@ -11,8 +11,17 @@
                 <input class="form-control" type="text" name="email">
 
                 <span class="input-group-btn">
-                              <button class="btn btn-default" type="submit">{{ trans('billing::newsletter.registration.confirm') }}</button>
-                        </span>
+
+                    <button
+                            class="g-recaptcha"
+                            data-sitekey="6LdTyiYUAAAAAKbhpq-JdqXHJ9_2K1sG7KctXy7C"
+                            data-callback="YourOnSubmitFn">
+                            {{ trans('billing::newsletter.registration.confirm') }}
+                    </button>
+                    <!--
+                    <button class="btn btn-default" type="submit"></button>
+                    -->
+                </span>
             </div>
 
         </form>

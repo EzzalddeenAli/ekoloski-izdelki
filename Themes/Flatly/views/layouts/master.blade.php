@@ -20,6 +20,8 @@
         <link rel="shortcut icon" href="{{ Theme::url('favicon.ico') }}">
 
         {!! Theme::style('css/main.css') !!}
+
+        <script src='https://www.google.com/recaptcha/api.js'></script>
     </head>
     <body>
 
