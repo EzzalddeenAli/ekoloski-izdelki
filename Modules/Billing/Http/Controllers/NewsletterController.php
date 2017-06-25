@@ -4,6 +4,7 @@ namespace Modules\Billing\Http\Controllers;
 
 use Modules\Billing\Http\Requests\NewsletterConfirmRequest;
 use Modules\Billing\Entities\Customer;
+use Modules\Billing\Utilities\Curl;
 
 use Illuminate\Support\Facades\Mail;
 use Modules\Billing\Mail\NewsletterConfirmation;
@@ -27,10 +28,22 @@ class NewsletterController
      * @param NewsletterConfirmRequest $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function sendConfirmation(NewsletterConfirmRequest $request) {
+    public function sendConfirmation(NewsletterConfirmRequest $request, Curl $curl) {
+
+        // check that user is human
+        $response = json_decode($curl->post("https://www.google.com/recaptcha/api/siteverify", [
+            'secret' => config('services.recaptcha.secret'),
+            'response' => $request->input('g-recaptcha-response'),
+            'remote_ip' => $request->ip()
+        ]));
+
+
+        if(!$response->success) {
+            abort(400, 'no');
+        }
+
 
         $email = $request->input("email");
-
         $customer = Customer::whereEmail($email)->first();
 
         if(!$customer) {
