@@ -43,6 +43,7 @@ $router->post('comments', ['as' => 'billing.comment.store', 'uses' => 'CommentsC
 
 // $router->any('deploy', ['middleware' => 'github.secret.token', 'as' => 'billing.deploy', 'uses' => 'DeployController@deploy']);
 
+/*
 Route::any('/github/webhook', function(){
 
 
@@ -74,4 +75,5 @@ Route::any('/github/webhook', function(){
 
 
 });
+*/
 
