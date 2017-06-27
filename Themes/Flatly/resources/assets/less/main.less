@@ -6,6 +6,8 @@
 @import "variables.less";
 @import "bootswatch";
 
+@import "landing.less";
+
 @import "components/list-item";
 
 /* Homepage */
@@ -89,6 +91,7 @@ blockquote {
   }
 }
 
+
 /* Book library */
 
 .book-list {
@@ -110,4 +113,77 @@ p.small {
 
 .fade-transition {
   transition: all .5s ease;
+}
+
+.bubble {
+  background: #1a242f;
+  color: #F6FFAD;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
+  line-height: 150px;
+  cursor: pointer;
+  opacity: 0.9
+}
+
+.bubble-border {
+  padding-top: 10px;
+  color: #ffffff;
+  background-color: #f39c12;
+  border-color: #f39c12;
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+}
+
+.landing {
+    padding-top: 20px;
+    /* The image used */
+    background-image: url("/themes/flatly/css/home2.JPG");
+
+    /* Set a specific height */
+    height: 600px;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+.fade-transition {
+  transition: all .5s ease;
+}
+
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-leave {
+  opacity: 0;
+}
+
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+  opacity: 0
+}
+
+
+/* Enter and leave animations can use different */
+/* durations and timing functions.              */
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to
+  /* .slide-fade-leave-active for <2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
 }
