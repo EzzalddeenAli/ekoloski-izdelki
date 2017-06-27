@@ -11,6 +11,6 @@
     "laravel-elixir": "^5.0.0"
   },
   "dependencies": {
-    "vuejs-paginator": "^2.0.1"
+
   }
 }
